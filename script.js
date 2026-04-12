@@ -132,41 +132,49 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ========== COURSES DATA & TABS ==========
+// ========== COURSES DATA ==========
 const coursesData = {
-    trending: [
-        { title: 'Generative AI & LLM Engineering', desc: 'Build production-ready AI applications with GPT, LangChain, and vector databases.', icon: 'fa-robot', color: '#f59e0b', duration: '16 Weeks', price: '₹24,999', badge: '🔥 Hot' },
-        { title: 'Full Stack MERN Development', desc: 'Master MongoDB, Express, React, and Node.js to build modern web applications.', icon: 'fa-layer-group', color: '#6366f1', duration: '20 Weeks', price: '₹19,999', badge: '⭐ Popular' },
-        { title: 'AWS Solutions Architect', desc: 'Design and deploy scalable applications on Amazon Web Services with certification prep.', icon: 'fa-cloud', color: '#06b6d4', duration: '12 Weeks', price: '₹17,999', badge: '☁️ Cloud' },
-        { title: 'Python for Data Science', desc: 'From EDA to machine learning — master Python for data-driven decision making.', icon: 'fa-chart-line', color: '#22c55e', duration: '14 Weeks', price: '₹15,999', badge: '📊 Data' },
-        { title: 'DevOps & CI/CD Pipeline', desc: 'Learn Docker, Kubernetes, Jenkins, and Terraform for modern DevOps workflows.', icon: 'fa-infinity', color: '#a855f7', duration: '12 Weeks', price: '₹16,999', badge: '🔧 DevOps' },
-        { title: 'React Native Mobile Dev', desc: 'Build cross-platform mobile apps for iOS and Android with React Native.', icon: 'fa-mobile-alt', color: '#ec4899', duration: '10 Weeks', price: '₹14,999', badge: '📱 Mobile' },
+    python: [
+        {
+            title: 'Python Full Stack Development',
+            desc: 'Build modern web apps from UI to API with Python, React, and SQL, plus job-ready projects.',
+            icon: 'fa-python',
+            color: '#3b82f6',
+            duration: '18 Weeks',
+            price: '₹8,000',
+            badge: '🚀 Career Track',
+            highlights: [
+                'HTML, CSS, JavaScript, Bootstrap foundations',
+                'React with hooks, routing, and performance',
+                'Python core, OOP, and backend architecture',
+                'SQL, CRUD, and database design fundamentals',
+            ],
+            pdf: 'Python%20full%20stack%20syllabus.pdf',
+        },
     ],
-    fullstack: [
-        { title: 'Full Stack Java Developer', desc: 'Java, Spring Boot, Microservices, React — complete enterprise stack.', icon: 'fa-java', color: '#ef4444', duration: '24 Weeks', price: '₹22,999', badge: '☕ Java' },
-        { title: 'MEAN Stack Development', desc: 'MongoDB, Express, Angular, Node.js — full-stack JavaScript mastery.', icon: 'fa-code', color: '#dd1b16', duration: '20 Weeks', price: '₹19,999', badge: 'Angular' },
-        { title: 'Python Full Stack', desc: 'Django/Flask backend with React frontend — versatile full stack skills.', icon: 'fa-python', color: '#3b82f6', duration: '18 Weeks', price: '₹18,999', badge: '🐍 Python' },
-    ],
-    placement: [
-        { title: 'Job Guarantee: Full Stack + DSA', desc: '100% placement guarantee with 6 months of intensive training and interview prep.', icon: 'fa-briefcase', color: '#f59e0b', duration: '28 Weeks', price: '₹49,999', badge: '💼 Job Guarantee' },
-        { title: 'Career Accelerator: Data Science', desc: 'Fast-track your data career with placement assistance and live projects.', icon: 'fa-rocket', color: '#10b981', duration: '24 Weeks', price: '₹44,999', badge: '🚀 Accelerator' },
-    ],
-    certification: [
-        { title: 'AWS Certified Developer', desc: 'Prepare for the AWS Developer Associate certification with hands-on labs.', icon: 'fa-certificate', color: '#f97316', duration: '8 Weeks', price: '₹12,999', badge: '🏅 Cert' },
-        { title: 'Azure Fundamentals + Admin', desc: 'Microsoft Azure certification track — AZ-900 to AZ-104.', icon: 'fa-microsoft', color: '#0ea5e9', duration: '10 Weeks', price: '₹14,999', badge: '🏅 Cert' },
-        { title: 'Google Cloud Professional', desc: 'GCP Professional Cloud Architect certification preparation.', icon: 'fa-google', color: '#16a34a', duration: '10 Weeks', price: '₹14,999', badge: '🏅 Cert' },
-    ],
-    internship: [
-        { title: 'AI & ML Internship', desc: '30-day immersive internship with capstone project and NASSCOM certification.', icon: 'fa-brain', color: '#8b5cf6', duration: '30 Days', price: '₹4,999', badge: '🎓 Intern' },
-        { title: 'Web Development Internship', desc: 'Build 5 real-world projects during your internship with mentor guidance.', icon: 'fa-globe', color: '#14b8a6', duration: '45 Days', price: '₹5,999', badge: '🎓 Intern' },
+    mern: [
+        {
+            title: 'MERN Stack Development',
+            desc: 'Go full stack with MongoDB, Express, React, and Node.js to ship portfolio-ready apps.',
+            icon: 'fa-layer-group',
+            color: '#6366f1',
+            duration: '18 Weeks',
+            price: '₹8,000',
+            badge: '⭐ Most Popular',
+            highlights: [
+                'HTML, CSS, JavaScript, Bootstrap essentials',
+                'React + Vite setup, components, hooks, routing',
+                'Node.js + Express, REST APIs, middleware',
+                'MongoDB + Mongoose, MVC, CRUD workflows',
+            ],
+            pdf: 'MERN%20Stack%20Syllabus.pdf',
+        },
     ],
 };
 
 const coursesGrid = document.getElementById('coursesGrid');
-const courseTabs = document.getElementById('courseTabs');
 
-function renderCourses(tab) {
-    const cards = coursesData[tab] || [];
+function renderCourses(cards) {
     coursesGrid.innerHTML = cards.map(c => `
         <div class="course-card">
             <div class="course-img" style="background: linear-gradient(135deg, ${c.color}33, ${c.color}11);">
@@ -176,6 +184,21 @@ function renderCourses(tab) {
             <div class="course-body">
                 <h3>${c.title}</h3>
                 <p>${c.desc}</p>
+                ${c.highlights ? `
+                    <ul class="course-highlights">
+                        ${c.highlights.map(item => `
+                            <li><i class="fas fa-check-circle"></i> ${item}</li>
+                        `).join('')}
+                    </ul>
+                ` : ''}
+                ${c.pdf ? `
+                    <div class="course-actions">
+                        <a class="course-download" href="${c.pdf}" download>
+                            <i class="fas fa-file-download"></i>
+                            Download syllabus
+                        </a>
+                    </div>
+                ` : ''}
                 <div class="course-meta">
                     <span><i class="fas fa-clock"></i> ${c.duration}</span>
                     <span class="course-price">${c.price}</span>
@@ -185,89 +208,11 @@ function renderCourses(tab) {
     `).join('');
 }
 
-renderCourses('trending');
-
-courseTabs.addEventListener('click', (e) => {
-    const btn = e.target.closest('.course-tab');
-    if (!btn) return;
-    courseTabs.querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    renderCourses(btn.dataset.tab);
-});
-
-// ========== STAT COUNTER ==========
-const statNumbers = document.querySelectorAll('.stat-number');
-let statsAnimated = false;
-
-function animateCounters() {
-    statNumbers.forEach(el => {
-        const target = +el.dataset.target;
-        const suffix = el.dataset.suffix || '+';
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-        const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            el.textContent = Math.floor(current).toLocaleString() + suffix;
-        }, 16);
-    });
-}
-
-const statsSection = document.getElementById('stats');
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !statsAnimated) {
-            statsAnimated = true;
-            animateCounters();
-        }
-    });
-}, { threshold: 0.3 });
-statsObserver.observe(statsSection);
-
-// ========== TESTIMONIALS CAROUSEL ==========
-const track = document.getElementById('testimonialTrack');
-const cards = track.querySelectorAll('.testimonial-card');
-const dotsContainer = document.getElementById('carouselDots');
-let currentSlide = 0;
-const slidesPerView = window.innerWidth > 768 ? 2 : 1;
-const totalSlides = Math.ceil(cards.length / slidesPerView);
-
-// Create dots
-for (let i = 0; i < totalSlides; i++) {
-    const dot = document.createElement('span');
-    dot.classList.add('dot-indicator');
-    if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(i));
-    dotsContainer.appendChild(dot);
-}
-
-function goToSlide(index) {
-    currentSlide = index;
-    const cardWidth = cards[0].offsetWidth + 24; // gap
-    track.style.transform = `translateX(-${currentSlide * cardWidth * slidesPerView}px)`;
-    dotsContainer.querySelectorAll('.dot-indicator').forEach((d, i) => {
-        d.classList.toggle('active', i === currentSlide);
-    });
-}
-
-document.getElementById('testimonialPrev').addEventListener('click', () => {
-    goToSlide(currentSlide > 0 ? currentSlide - 1 : totalSlides - 1);
-});
-document.getElementById('testimonialNext').addEventListener('click', () => {
-    goToSlide(currentSlide < totalSlides - 1 ? currentSlide + 1 : 0);
-});
-
-// Auto-play
-setInterval(() => {
-    goToSlide(currentSlide < totalSlides - 1 ? currentSlide + 1 : 0);
-}, 5000);
+const allCourses = Object.values(coursesData).flat();
+renderCourses(allCourses);
 
 // ========== SCROLL REVEAL ANIMATIONS ==========
-const revealElements = document.querySelectorAll('.section-header, .course-card, .service-card, .belief, .stat-card, .domain-card, .testimonial-card, .blog-card, .contact-item, .company-logo');
+const revealElements = document.querySelectorAll('.section-header, .course-card, .service-card, .belief, .contact-item, .company-logo');
 
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -289,6 +234,41 @@ revealElements.forEach(el => {
 // ========== CONTACT FORM ==========
 document.getElementById('contactForm').addEventListener('submit', (e) => {
     e.preventDefault();
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmailInput').value.trim();
+    const phone = document.getElementById('contactPhoneInput').value.trim();
+    const interestedIn = document.getElementById('contactCourse').value;
+    const message = document.getElementById('contactMessage').value.trim();
+
+    if (!name || !email || !phone || !interestedIn) return;
+
+    const iframe = document.getElementById('contactIframe');
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = APPS_SCRIPT_URL;
+    form.target = 'contactIframe';
+
+    const fields = {
+        name,
+        email,
+        phone,
+        interestedIn,
+        message,
+        formType: 'contact',
+    };
+
+    Object.entries(fields).forEach(([key, val]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = val;
+        form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
     const btn = document.getElementById('contactSubmitBtn');
     btn.innerHTML = '<i class="fas fa-check"></i> <span>Message Sent!</span>';
     btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
@@ -345,19 +325,38 @@ function closeEnrollModal() {
     document.body.style.overflow = '';
 }
 
+function openPlacementModal() {
+    document.getElementById('placementModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('placementFormScreen').style.display = 'block';
+    document.getElementById('placementSuccessScreen').style.display = 'none';
+    document.getElementById('placementForm').reset();
+}
+
+function closePlacementModal() {
+    document.getElementById('placementModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
 // Close on overlay click
 document.getElementById('enrollModal').addEventListener('click', function (e) {
     if (e.target === this) closeEnrollModal();
 });
 
+document.getElementById('placementModal').addEventListener('click', function (e) {
+    if (e.target === this) closePlacementModal();
+});
+
 // Close on Escape key
 document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeEnrollModal();
+    if (e.key === 'Escape') {
+        closeEnrollModal();
+        closePlacementModal();
+    }
 });
 
 // ⚠️ Replace this with your deployed Google Apps Script Web App URL
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6-AGxU32W7vfobNVxy93JtPgxmqMOfdh9GRS7N77eSv5swflKBTbKMgB_N3wbCi4Lfw/exec';
-
 // Form submit
 document.getElementById('enrollForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -392,4 +391,50 @@ document.getElementById('enrollForm').addEventListener('submit', function (e) {
 
     document.getElementById('enrollFormScreen').style.display = 'none';
     document.getElementById('enrollSuccessScreen').style.display = 'block';
+});
+
+// Placement assistance submit
+document.getElementById('placementForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('placement-name').value.trim();
+    const email = document.getElementById('placement-email').value.trim();
+    const phone = document.getElementById('placement-phone').value.trim();
+    const passout = document.getElementById('placement-passout').value;
+    const branch = document.getElementById('placement-branch').value;
+    const assistanceType = document.getElementById('placement-assistance').value;
+    const domainInterest = document.getElementById('placement-domain').value;
+
+    if (!name || !email || !phone || !passout || !branch || !assistanceType || !domainInterest) return;
+
+    const iframe = document.getElementById('placementIframe');
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = APPS_SCRIPT_URL;
+    form.target = 'placementIframe';
+
+    const fields = {
+        name,
+        email,
+        phone,
+        passout,
+        branch,
+        assistanceType,
+        domainInterest,
+        formType: 'placement',
+    };
+    Object.entries(fields).forEach(([key, val]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = val;
+        form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    document.getElementById('placementFormScreen').style.display = 'none';
+    document.getElementById('placementSuccessScreen').style.display = 'block';
 });

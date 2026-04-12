@@ -2,6 +2,27 @@
 // Then deploy as Web App (Execute as: Me, Who has access: Anyone)
 
 const SHEET_NAME = "Enrollments";
+const PLACEMENT_SHEET_NAME = "Placement Assistance";
+const CONTACT_SHEET_NAME = "Contact Messages";
+
+const ENROLL_HEADERS = [
+  "S.No", "Full Name", "Email ID", "Phone Number",
+  "Pass Out Year", "Branch", "Submitted At"
+];
+
+const PLACEMENT_HEADERS = [
+  "S.No", "Full Name", "Email ID", "Phone Number",
+  "Pass Out Year", "Branch", "Assistance Type", "Domain Interest", "Submitted At"
+];
+
+const CONTACT_HEADERS = [
+  "S.No", "Full Name", "Email ID", "Phone Number",
+  "Interested In", "Message", "Submitted At"
+];
+
+const ENROLL_WIDTHS = [60, 180, 220, 150, 130, 200, 200];
+const PLACEMENT_WIDTHS = [60, 180, 220, 150, 130, 200, 200, 220, 200];
+const CONTACT_WIDTHS = [60, 180, 220, 150, 160, 320, 200];
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -9,16 +30,41 @@ function doPost(e) {
 
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    let sheet = ss.getSheetByName(SHEET_NAME);
+    let data = {};
+    if (e.postData.type === "application/json") {
+      data = JSON.parse(e.postData.contents);
+    } else {
+      data = e.parameter;
+    }
+
+    // Decide target sheet based on form type
+    const formType = (data.formType || "").toLowerCase();
+    let targetSheetName = SHEET_NAME;
+    if (formType === "placement") {
+      targetSheetName = PLACEMENT_SHEET_NAME;
+    } else if (formType === "contact") {
+      targetSheetName = CONTACT_SHEET_NAME;
+    }
+
+    let sheet = ss.getSheetByName(targetSheetName);
+    let headers = ENROLL_HEADERS;
+    let widths = ENROLL_WIDTHS;
+    if (targetSheetName === PLACEMENT_SHEET_NAME) {
+      headers = PLACEMENT_HEADERS;
+      widths = PLACEMENT_WIDTHS;
+    } else if (targetSheetName === CONTACT_SHEET_NAME) {
+      headers = CONTACT_HEADERS;
+      widths = CONTACT_WIDTHS;
+    }
 
     // Create sheet with headers if it doesn't exist
     if (!sheet) {
-      sheet = ss.insertSheet(SHEET_NAME);
-      const headers = [
-        "S.No", "Full Name", "Email ID", "Phone Number",
-        "Pass Out Year", "Branch", "Submitted At"
-      ];
-      const headerRange = sheet.getRange(1, 1, 1, headers.length);
+      sheet = ss.insertSheet(targetSheetName);
+    }
+
+    const headerRange = sheet.getRange(1, 1, 1, headers.length);
+    const existingHeaders = headerRange.getValues()[0];
+    if (existingHeaders.join("|") !== headers.join("|")) {
       headerRange.setValues([headers]);
       headerRange.setBackground("#4f46e5");
       headerRange.setFontColor("#ffffff");
@@ -26,21 +72,11 @@ function doPost(e) {
       headerRange.setFontSize(11);
       headerRange.setHorizontalAlignment("center");
       sheet.setFrozenRows(1);
-      sheet.setColumnWidth(1, 60);
-      sheet.setColumnWidth(2, 180);
-      sheet.setColumnWidth(3, 220);
-      sheet.setColumnWidth(4, 150);
-      sheet.setColumnWidth(5, 130);
-      sheet.setColumnWidth(6, 200);
-      sheet.setColumnWidth(7, 200);
-    }
 
-    // Handle both JSON and form-encoded data
-    let data = {};
-    if (e.postData.type === "application/json") {
-      data = JSON.parse(e.postData.contents);
-    } else {
-      data = e.parameter;
+      headers.forEach((_, index) => {
+        const width = widths[index] || 180;
+        sheet.setColumnWidth(index + 1, width);
+      });
     }
 
     const lastRow = sheet.getLastRow();
@@ -49,7 +85,32 @@ function doPost(e) {
       new Date(), Session.getScriptTimeZone(), "dd-MM-yyyy HH:mm:ss"
     );
 
-    const newRow = [sno, data.name, data.email, data.phone, data.passout, data.branch, timestamp];
+    let newRow = [];
+    if (targetSheetName === PLACEMENT_SHEET_NAME) {
+      newRow = [
+        sno,
+        data.name,
+        data.email,
+        data.phone,
+        data.passout,
+        data.branch,
+        data.assistanceType,
+        data.domainInterest,
+        timestamp
+      ];
+    } else if (targetSheetName === CONTACT_SHEET_NAME) {
+      newRow = [
+        sno,
+        data.name,
+        data.email,
+        data.phone,
+        data.interestedIn,
+        data.message,
+        timestamp
+      ];
+    } else {
+      newRow = [sno, data.name, data.email, data.phone, data.passout, data.branch, timestamp];
+    }
     sheet.appendRow(newRow);
 
     const rowIndex = sheet.getLastRow();
@@ -58,7 +119,7 @@ function doPost(e) {
     }
     sheet.getRange(rowIndex, 1).setHorizontalAlignment("center");
     sheet.getRange(rowIndex, 5).setHorizontalAlignment("center");
-    sheet.getRange(rowIndex, 7).setHorizontalAlignment("center");
+    sheet.getRange(rowIndex, newRow.length).setHorizontalAlignment("center");
 
     return ContentService
       .createTextOutput(JSON.stringify({ result: "success" }))
