@@ -88,8 +88,7 @@
             </ul>
 
             <div class="nav-actions">
-                <a href="#" class="btn-login" id="loginBtn"><i class="fas fa-user"></i> Login</a>
-                <a href="#courses" class="btn-enroll" id="enrollBtn">Enroll Now</a>
+                <button class="btn-enroll" id="enrollBtn" onclick="openEnrollModal()">Enroll Now</button>
             </div>
 
             <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
@@ -876,6 +875,73 @@ career.<span class="code-func">ignite</span>().<span class="code-func">then</spa
     <a href="https://wa.me/919876543210" class="whatsapp-float" id="whatsappFloat" target="_blank" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- Enroll Modal -->
+    <div class="enroll-modal-overlay" id="enrollModal" role="dialog" aria-modal="true" aria-labelledby="enrollModalTitle">
+        <div class="enroll-modal">
+            <button class="enroll-modal-close" onclick="closeEnrollModal()" aria-label="Close">&times;</button>
+
+            <!-- Form Screen -->
+            <div id="enrollFormScreen">
+                <div class="enroll-modal-header">
+                    <div class="enroll-modal-icon"><i class="fas fa-bolt"></i></div>
+                    <h2 id="enrollModalTitle">Enroll Now</h2>
+                    <p>Fill in your details and we'll get back to you shortly.</p>
+                </div>
+                <form id="enrollForm" novalidate>
+                    <div class="enroll-field">
+                        <label for="enroll-name">Full Name</label>
+                        <input type="text" id="enroll-name" placeholder="e.g. Rahul Sharma" required>
+                    </div>
+                    <div class="enroll-field">
+                        <label for="enroll-email">Email ID</label>
+                        <input type="email" id="enroll-email" placeholder="e.g. rahul@email.com" required>
+                    </div>
+                    <div class="enroll-field">
+                        <label for="enroll-phone">Phone Number</label>
+                        <input type="tel" id="enroll-phone" placeholder="e.g. 9876543210" required>
+                    </div>
+                    <div class="enroll-row">
+                        <div class="enroll-field">
+                            <label for="enroll-passout">Pass Out Year</label>
+                            <select id="enroll-passout" required>
+                                <option value="" disabled selected>Select year</option>
+                                <option>2022</option><option>2023</option><option>2024</option>
+                                <option>2025</option><option>2026</option><option>2027</option>
+                            </select>
+                        </div>
+                        <div class="enroll-field">
+                            <label for="enroll-branch">Branch</label>
+                            <select id="enroll-branch" required>
+                                <option value="" disabled selected>Select branch</option>
+                                <option>Computer Science</option>
+                                <option>Information Technology</option>
+                                <option>Electronics & Communication</option>
+                                <option>Electrical Engineering</option>
+                                <option>Mechanical Engineering</option>
+                                <option>Civil Engineering</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="enroll-submit-btn">Submit <i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+
+            <!-- Success Screen -->
+            <div id="enrollSuccessScreen" style="display:none;">
+                <div class="enroll-success">
+                    <div class="success-icon"><i class="fas fa-check"></i></div>
+                    <h2>You're All Set!</h2>
+                    <p>Thank you for enrolling. Our team will be reaching out to you soon.</p>
+                    <button class="enroll-submit-btn" onclick="closeEnrollModal()">Back to Home</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden iframe for form submission to Google Apps Script -->
+    <iframe name="enrollIframe" id="enrollIframe" style="display:none;"></iframe>
 
     <script src="script.js"></script>
 </body>
