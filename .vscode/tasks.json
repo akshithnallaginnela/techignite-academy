@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Serve static site",
+			"type": "shell",
+			"command": "npx",
+			"args": [
+				"serve",
+				"."
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
