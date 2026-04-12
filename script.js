@@ -329,3 +329,67 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// ========== ENROLL MODAL ==========
+function openEnrollModal() {
+    document.getElementById('enrollModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Reset to form screen
+    document.getElementById('enrollFormScreen').style.display = 'block';
+    document.getElementById('enrollSuccessScreen').style.display = 'none';
+    document.getElementById('enrollForm').reset();
+}
+
+function closeEnrollModal() {
+    document.getElementById('enrollModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Close on overlay click
+document.getElementById('enrollModal').addEventListener('click', function (e) {
+    if (e.target === this) closeEnrollModal();
+});
+
+// Close on Escape key
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeEnrollModal();
+});
+
+// ⚠️ Replace this with your deployed Google Apps Script Web App URL
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6-AGxU32W7vfobNVxy93JtPgxmqMOfdh9GRS7N77eSv5swflKBTbKMgB_N3wbCi4Lfw/exec';
+
+// Form submit
+document.getElementById('enrollForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('enroll-name').value.trim();
+    const email   = document.getElementById('enroll-email').value.trim();
+    const phone   = document.getElementById('enroll-phone').value.trim();
+    const passout = document.getElementById('enroll-passout').value;
+    const branch  = document.getElementById('enroll-branch').value;
+
+    if (!name || !email || !phone || !passout || !branch) return;
+
+    // Submit via hidden iframe to avoid CORS and page redirect
+    const iframe = document.getElementById('enrollIframe');
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = APPS_SCRIPT_URL;
+    form.target = 'enrollIframe';
+
+    const fields = { name, email, phone, passout, branch };
+    Object.entries(fields).forEach(([key, val]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = val;
+        form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    document.getElementById('enrollFormScreen').style.display = 'none';
+    document.getElementById('enrollSuccessScreen').style.display = 'block';
+});
