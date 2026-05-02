@@ -1843,7 +1843,8 @@ select {
 
     .hero-visual {
         order: 2;
-        max-width: 500px;
+        max-width: 100%;
+        width: 100%;
         margin: 0 auto;
     }
 
@@ -1865,6 +1866,11 @@ select {
 
     .code-window {
         transform: none;
+    }
+
+    .code-body {
+        padding: 16px;
+        font-size: 0.75rem;
     }
 
     .about-grid,
