@@ -136,40 +136,66 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const coursesData = {
     python: [
         {
-            title: 'Python Full Stack Development',
-            desc: 'Build modern web apps from UI to API with Python, React, and SQL, plus job-ready projects.',
-            icon: 'fa-python',
+            id: 'python',
+            title: 'Python Full Stack + DSA',
+            desc: 'Build modern web apps from UI to API with Python, React, SQL, and master problem-solving.',
+            iconHtml: '<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" style="width:24px;height:24px;">',
             color: '#3b82f6',
-            duration: '18 Weeks',
-            price: '₹8,000',
+            duration: '24 weeks',
+            price: '<del style="opacity:0.6;font-size:0.8em;margin-right:8px;">₹12,000</del>₹8,000',
             badge: '🚀 Career Track',
             highlights: [
-                'HTML, CSS, JavaScript, Bootstrap foundations',
-                'React with hooks, routing, and performance',
+                'HTML, CSS, JS, Bootstrap & React hooks',
                 'Python core, OOP, and backend architecture',
-                'SQL, CRUD, and database design fundamentals',
-            ],
-            pdf: 'Python%20full%20stack%20syllabus.pdf',
-        },
+                'SQL, CRUD, database design & REST APIs',
+                'DSA: Arrays, Strings, Linked Lists, Stacks, Queues, Trees, Hashmaps, Sorting, Searching, DP',
+            ]
+        }
     ],
     mern: [
         {
-            title: 'MERN Stack Development',
+            id: 'mern',
+            title: 'MERN Stack + DSA',
             desc: 'Go full stack with MongoDB, Express, React, and Node.js to ship portfolio-ready apps.',
-            icon: 'fa-layer-group',
+            iconHtml: `
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" style="width:24px;height:24px;margin-right:4px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" style="width:24px;height:24px;margin-right:4px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" style="width:24px;height:24px;background:#fff;border-radius:4px;margin-right:4px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" style="width:24px;height:24px;">
+            `,
             color: '#6366f1',
-            duration: '18 Weeks',
-            price: '₹8,000',
+            duration: '24 weeks',
+            price: '<del style="opacity:0.6;font-size:0.8em;margin-right:8px;">₹12,000</del>₹8,000',
             badge: '⭐ Most Popular',
             highlights: [
-                'HTML, CSS, JavaScript, Bootstrap essentials',
-                'React + Vite setup, components, hooks, routing',
-                'Node.js + Express, REST APIs, middleware',
-                'MongoDB + Mongoose, MVC, CRUD workflows',
-            ],
-            pdf: 'MERN%20Stack%20Syllabus.pdf',
-        },
+                'HTML, CSS, JS, Bootstrap essentials',
+                'React + Vite setup, components, routing',
+                'Node.js + Express, APIs, MongoDB, MVC',
+                'DSA: Arrays, Strings, Linked Lists, Stacks, Queues, Trees, Hashmaps, Sorting, Searching, DP',
+            ]
+        }
     ],
+    java: [
+        {
+            id: 'java',
+            title: 'Java Full Stack + DSA',
+            desc: 'Learn robust enterprise development using Java, Spring Boot, React, and SQL.',
+            iconHtml: `
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" style="width:24px;height:24px;margin-right:4px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" style="width:24px;height:24px;">
+            `,
+            color: '#ef4444',
+            duration: '24 weeks',
+            price: '<del style="opacity:0.6;font-size:0.8em;margin-right:8px;">₹15,000</del>₹10,000',
+            badge: '💼 Enterprise Track',
+            highlights: [
+                'HTML, CSS, JS & React Fundamentals',
+                'Core Java, OOP, Streams, Multithreading',
+                'Spring Boot, JPA/Hibernate, Microservices',
+                'DSA: Arrays, Strings, Linked Lists, Stacks, Queues, Trees, Hashmaps, Sorting, Searching, DP',
+            ]
+        }
+    ]
 };
 
 const coursesGrid = document.getElementById('coursesGrid');
@@ -178,7 +204,9 @@ function renderCourses(cards) {
     coursesGrid.innerHTML = cards.map(c => `
         <div class="course-card">
             <div class="course-img" style="background: linear-gradient(135deg, ${c.color}33, ${c.color}11);">
-                <i class="fas ${c.icon}" style="color:${c.color};"></i>
+                <div style="display:flex; align-items:center;">
+                    ${c.iconHtml ? c.iconHtml : `<i class="fas ${c.icon}" style="color:${c.color};"></i>`}
+                </div>
                 <span class="course-badge">${c.badge}</span>
             </div>
             <div class="course-body">
@@ -191,15 +219,16 @@ function renderCourses(cards) {
                         `).join('')}
                     </ul>
                 ` : ''}
-                ${c.pdf ? `
-                    <div class="course-actions">
-                        <a class="course-download" href="${c.pdf}" download>
-                            <i class="fas fa-file-download"></i>
-                            Download syllabus
-                        </a>
-                    </div>
-                ` : ''}
-                <div class="course-meta">
+                <div class="course-actions">
+                    <button class="course-download" style="border:none; cursor:pointer; width:100%; display:block; background-color:#F97316; color:#fff;" onclick="openSyllabusModal('${c.id}')">
+                        <i class="fas fa-eye"></i>
+                        View Syllabus
+                    </button>
+                    <button class="course-enroll btn-primary" style="margin-top:10px; width:100%; border:none; padding:12px; border-radius:8px; cursor:pointer;" onclick="openEnrollModal('${c.title}')">
+                        <i class="fas fa-bolt"></i> Enroll
+                    </button>
+                </div>
+                <div class="course-meta" style="margin-top:15px;">
                     <span><i class="fas fa-clock"></i> ${c.duration}</span>
                     <span class="course-price">${c.price}</span>
                 </div>
@@ -310,14 +339,109 @@ window.addEventListener('scroll', () => {
     });
 });
 
+const syllabi = {
+    python: {
+        title: "Python Full Stack + DSA",
+        content: `
+            <h3>Phase 1: DSA (Data Structures & Algorithms)</h3>
+            <ul>
+                <li><strong>Weeks 1-3:</strong> Big-O, Arrays, Strings, Two Pointers, Sliding Window.</li>
+                <li><strong>Weeks 4-6:</strong> Linked Lists, Stacks, Queues, Hashmaps.</li>
+                <li><strong>Weeks 7-9:</strong> Recursion, Trees, Searching, Sorting, Basics of Dynamic Programming.</li>
+            </ul>
+            <h3>Phase 2: Frontend Foundations</h3>
+            <ul>
+                <li><strong>Weeks 10-12:</strong> HTML5, CSS3, Flexbox, Grid, Responsive Design, Bootstrap/Tailwind.</li>
+                <li><strong>Weeks 13-15:</strong> Advanced JavaScript (ES6+), DOM Manipulation, Fetch API, Async/Await.</li>
+                <li><strong>Weeks 16-18:</strong> React Fundamentals, Hooks (useState, useEffect), React Router, State Management.</li>
+            </ul>
+            <h3>Phase 3: Backend & Full Stack</h3>
+            <ul>
+                <li><strong>Weeks 19-21:</strong> Python OOP, Django/Flask basics, RESTful APIs setup, authentication.</li>
+                <li><strong>Weeks 22-23:</strong> Relational Databases, PostgreSQL/MySQL, CRUD operations, ORMs.</li>
+                <li><strong>Week 24:</strong> Final Full Stack Capstone Project, Deployment, Resume Review.</li>
+            </ul>
+        `
+    },
+    mern: {
+        title: "MERN Stack + DSA",
+        content: `
+            <h3>Phase 1: DSA (Data Structures & Algorithms)</h3>
+            <ul>
+                <li><strong>Weeks 1-3:</strong> Big-O, Arrays, Strings, Two Pointers, Sliding Window.</li>
+                <li><strong>Weeks 4-6:</strong> Linked Lists, Stacks, Queues, Hashmaps.</li>
+                <li><strong>Weeks 7-9:</strong> Recursion, Trees, Searching, Sorting, Basics of Dynamic Programming.</li>
+            </ul>
+            <h3>Phase 2: Frontend Foundations</h3>
+            <ul>
+                <li><strong>Weeks 10-12:</strong> HTML5, CSS3, Flexbox, Grid, Responsive Design, Bootstrap/Tailwind.</li>
+                <li><strong>Weeks 13-15:</strong> Advanced JavaScript (ES6+), DOM Manipulation, Fetch API, Async/Await.</li>
+                <li><strong>Weeks 16-18:</strong> React Fundamentals, Hooks, Context API, Redux/Zustand.</li>
+            </ul>
+            <h3>Phase 3: Backend & Full Stack</h3>
+            <ul>
+                <li><strong>Weeks 19-21:</strong> Node.js, Express.js, REST API design, JWT Authentication, Middleware.</li>
+                <li><strong>Weeks 22-23:</strong> MongoDB, Mongoose, Schemas, Aggregations, Integrations.</li>
+                <li><strong>Week 24:</strong> Final Full Stack Capstone Project, Deployment, Resume Review.</li>
+            </ul>
+        `
+    },
+    java: {
+        title: "Java Full Stack + DSA",
+        content: `
+            <h3>Phase 1: DSA (Data Structures & Algorithms)</h3>
+            <ul>
+                <li><strong>Weeks 1-3:</strong> Big-O, Arrays, Strings, Two Pointers, Sliding Window.</li>
+                <li><strong>Weeks 4-6:</strong> Linked Lists, Stacks, Queues, Hashmaps.</li>
+                <li><strong>Weeks 7-9:</strong> Recursion, Trees, Searching, Sorting, Basics of Dynamic Programming.</li>
+            </ul>
+            <h3>Phase 2: Frontend Foundations</h3>
+            <ul>
+                <li><strong>Weeks 10-12:</strong> HTML5, CSS3, Flexbox, Grid, JavaScript Essentials.</li>
+                <li><strong>Weeks 13-15:</strong> React Fundamentals, Hooks (useState, useEffect), JSX, Component Lifecycle.</li>
+            </ul>
+            <h3>Phase 3: Backend & Full Stack</h3>
+            <ul>
+                <li><strong>Weeks 16-18:</strong> Core Java, OOP Concepts, Collections Framework, Streams API, Multithreading.</li>
+                <li><strong>Weeks 19-21:</strong> Spring Core, Spring Boot basics, REST API Creation, JDBC, JPA/Hibernate.</li>
+                <li><strong>Weeks 22-23:</strong> Spring Security, JWT, Microservices basic concepts, SQL Databases.</li>
+                <li><strong>Week 24:</strong> Final Full Stack Capstone Project, Deployment, Resume Review.</li>
+            </ul>
+        `
+    }
+};
+
+function openSyllabusModal(courseId) {
+    document.getElementById('syllabusModalTitle').innerHTML = syllabi[courseId].title;
+    document.getElementById('syllabusModalContent').innerHTML = syllabi[courseId].content;
+    document.getElementById('syllabusModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSyllabusModal() {
+    document.getElementById('syllabusModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
 // ========== ENROLL MODAL ==========
-function openEnrollModal() {
+function openEnrollModal(preselectedCourse = '') {
     document.getElementById('enrollModal').classList.add('active');
     document.body.style.overflow = 'hidden';
-    // Reset to form screen
     document.getElementById('enrollFormScreen').style.display = 'block';
     document.getElementById('enrollSuccessScreen').style.display = 'none';
     document.getElementById('enrollForm').reset();
+    
+    if (preselectedCourse) {
+        const select = document.getElementById('enroll-course');
+        if(select) {
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === preselectedCourse || select.options[i].text === preselectedCourse) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+    }
 }
 
 function closeEnrollModal() {
@@ -366,8 +490,9 @@ document.getElementById('enrollForm').addEventListener('submit', function (e) {
     const phone   = document.getElementById('enroll-phone').value.trim();
     const passout = document.getElementById('enroll-passout').value;
     const branch  = document.getElementById('enroll-branch').value;
+    const course  = document.getElementById('enroll-course').value;
 
-    if (!name || !email || !phone || !passout || !branch) return;
+    if (!name || !email || !phone || !passout || !branch || !course) return;
 
     // Submit via hidden iframe to avoid CORS and page redirect
     const iframe = document.getElementById('enrollIframe');
@@ -376,7 +501,7 @@ document.getElementById('enrollForm').addEventListener('submit', function (e) {
     form.action = APPS_SCRIPT_URL;
     form.target = 'enrollIframe';
 
-    const fields = { name, email, phone, passout, branch };
+    const fields = { name, email, phone, passout, branch, course };
     Object.entries(fields).forEach(([key, val]) => {
         const input = document.createElement('input');
         input.type = 'hidden';

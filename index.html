@@ -211,7 +211,7 @@ career.<span class="code-func">ignite</span>().<span class="code-func">then</spa
             <div class="section-header">
                 <span class="section-badge">What We Offer</span>
                 <h2 class="section-title">Training <span class="gradient-text">Services</span></h2>
-                <p class="section-desc">Straight from the Python and MERN full stack syllabi so you know exactly what you will learn</p>
+                <p class="section-desc">Experience hands-on, project-based learning combining essential theory with real-world coding. Our programs are carefully structured to be suitable for everyone—from beginners taking their first steps to intermediate learners leveling up.</p>
             </div>
 
             <div class="services-grid">
@@ -272,7 +272,6 @@ career.<span class="code-func">ignite</span>().<span class="code-func">then</spa
                         <span>Portfolio</span>
                         <span>Guidance</span>
                     </div>
-                    <button class="service-link" type="button" onclick="openPlacementModal()">Request Placement Support <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
@@ -284,11 +283,14 @@ career.<span class="code-func">ignite</span>().<span class="code-func">then</spa
             <div class="about-grid">
                 <div class="about-content">
                     <span class="section-badge">Our Story</span>
-                    <h2 class="section-title">Built by recent graduates for <span class="gradient-text">clear learning</span></h2>
+                    <h2 class="section-title">Built by graduates for <span class="gradient-text">clear learning</span></h2>
                     <p class="about-desc">
-                        We are a small team of recent graduates who found most training too confusing or rushed.
+                        We are a team of graduates who found most training too confusing or rushed.
                         TechIgnite Academy is our student-led edtech startup focused on simple explanations, transparent
                         syllabi, and step-by-step learning for anyone serious about tech.
+                        <br><br>
+                        Reach out at <a href="mailto:techigniteacademy@gmail.com" style="color:var(--primary-color);">techigniteacademy@gmail.com</a>
+                        or follow us on <a href="https://instagram.com/techigniteacademy" target="_blank" style="color:var(--primary-color);">Instagram</a>.
                     </p>
                     <div class="about-beliefs">
                         <div class="belief" id="beliefTalent">
@@ -679,6 +681,17 @@ career.<span class="code-func">ignite</span>().<span class="code-func">then</spa
                             </select>
                         </div>
                     </div>
+                    <div class="enroll-row">
+                        <div class="enroll-field">
+                            <label for="enroll-course">Course Selected</label>
+                            <select id="enroll-course" required>
+                                <option value="" disabled selected>Select course</option>
+                                <option value="Python Full Stack + DSA">Python Full Stack + DSA</option>
+                                <option value="MERN Stack + DSA">MERN Stack + DSA</option>
+                                <option value="Java Full Stack + DSA">Java Full Stack + DSA</option>
+                            </select>
+                        </div>
+                    </div>
                     <button type="submit" class="enroll-submit-btn">Submit <i class="fas fa-arrow-right"></i></button>
                 </form>
             </div>
@@ -703,6 +716,18 @@ career.<span class="code-func">ignite</span>().<span class="code-func">then</spa
 
     <!-- Hidden iframe for contact submission to Google Apps Script -->
     <iframe name="contactIframe" id="contactIframe" style="display:none;"></iframe>
+
+    <!-- Syllabus Modal -->
+    <div class="enroll-modal-overlay" id="syllabusModal" role="dialog" aria-modal="true">
+        <div class="enroll-modal" style="max-width: 800px; max-height: 90vh; display: flex; flex-direction: column;">
+            <div class="enroll-modal-header" style="flex-shrink: 0; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                <h2 id="syllabusModalTitle" style="margin: 0;">Syllabus</h2>
+                <button class="enroll-modal-close" onclick="closeSyllabusModal()" aria-label="Close" style="position: static;">&times;</button>
+            </div>
+            <div id="syllabusModalContent" style="overflow-y: auto; padding-top: 20px; flex-grow: 1; text-align: left; line-height: 1.6;">
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
