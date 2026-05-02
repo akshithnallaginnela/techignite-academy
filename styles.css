@@ -639,6 +639,12 @@ textarea:focus {
     font-weight: 500;
 }
 
+/* Hero Visual */
+.hero-visual {
+    position: relative;
+    z-index: 1;
+}
+
 /* Code Window */
 .code-window {
     background: #1e1e2e;
