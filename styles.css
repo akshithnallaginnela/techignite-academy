@@ -821,10 +821,12 @@ textarea:focus {
     overflow: hidden;
     position: relative;
     z-index: 2;
+    width: 100%;
 }
 
 .ticker-wrap {
     overflow: hidden;
+    width: 100%;
 }
 
 .ticker {
@@ -1494,6 +1496,7 @@ textarea:focus {
     position: absolute;
     border-radius: 50%;
     filter: blur(100px);
+    overflow-x: hidden;
 }
 
 .cta-shape-1 {

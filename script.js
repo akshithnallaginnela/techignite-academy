@@ -139,7 +139,7 @@ const coursesData = {
             id: 'python',
             title: 'Python Full Stack + DSA',
             desc: 'Build modern web apps from UI to API with Python, React, SQL, and master problem-solving.',
-            iconHtml: '<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" style="width:24px;height:24px;">',
+            iconHtml: '<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" style="width:40px;height:40px;">',
             color: '#3b82f6',
             duration: '24 weeks',
             price: '<del style="opacity:0.6;font-size:0.8em;margin-right:8px;">₹12,000</del>₹8,000',
@@ -158,10 +158,10 @@ const coursesData = {
             title: 'MERN Stack + DSA',
             desc: 'Go full stack with MongoDB, Express, React, and Node.js to ship portfolio-ready apps.',
             iconHtml: `
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" style="width:24px;height:24px;margin-right:4px;">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" style="width:24px;height:24px;margin-right:4px;">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" style="width:24px;height:24px;background:#fff;border-radius:4px;margin-right:4px;">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" style="width:24px;height:24px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" style="width:40px;height:40px;margin-right:8px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" style="width:40px;height:40px;margin-right:8px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" style="width:40px;height:40px;background:#fff;border-radius:6px;margin-right:8px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" style="width:40px;height:40px;">
             `,
             color: '#6366f1',
             duration: '24 weeks',
@@ -181,8 +181,8 @@ const coursesData = {
             title: 'Java Full Stack + DSA',
             desc: 'Learn robust enterprise development using Java, Spring Boot, React, and SQL.',
             iconHtml: `
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" style="width:24px;height:24px;margin-right:4px;">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" style="width:24px;height:24px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" style="width:40px;height:40px;margin-right:8px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" style="width:40px;height:40px;">
             `,
             color: '#ef4444',
             duration: '24 weeks',
