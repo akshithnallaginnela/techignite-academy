@@ -702,10 +702,13 @@ textarea:focus {
     padding: 24px;
     font-size: 0.88rem;
     line-height: 1.8;
+    overflow-x: auto;
 }
 
 .code-body pre {
     font-family: 'Fira Code', 'Consolas', monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .code-keyword {
