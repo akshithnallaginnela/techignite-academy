@@ -1897,28 +1897,37 @@ select {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .top-bar {
         display: none;
     }
 
     .nav-links {
-        display: none;
         position: fixed;
         top: 72px;
         left: 0;
         right: 0;
-        bottom: 0;
-        background: var(--bg-primary);
+        height: calc(100vh - 72px);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(15px);
         flex-direction: column;
         padding: 24px;
         gap: 0;
         overflow-y: auto;
-        z-index: 100;
+        z-index: 99;
+        
+        /* Animation properties */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
     }
 
     .nav-links.open {
-        display: flex;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
     }
 
     .nav-links>li>a {
@@ -1928,18 +1937,24 @@ select {
 
     .dropdown-menu {
         position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
         box-shadow: none;
         border: none;
         background: transparent;
         padding-left: 20px;
-        display: none;
+        
+        /* Smooth expand animation */
+        max-height: 0;
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        transform: translateY(0);
     }
 
     .dropdown.open .dropdown-menu {
-        display: block;
+        max-height: 400px; /* arbitrary large value to accommodate items */
+        opacity: 1;
+        visibility: visible;
     }
 
     .nav-actions {
