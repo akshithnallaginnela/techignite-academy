@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TechIgnite Academy favicon">
+  <defs>
+    <linearGradient id="flame" x1="16" y1="8" x2="48" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd84d"/>
+      <stop offset="0.45" stop-color="#ffb11a"/>
+      <stop offset="1" stop-color="#ef6c00"/>
+    </linearGradient>
+    <linearGradient id="base" x1="18" y1="44" x2="46" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 7c7 8 11 15 11 23 0 8-4 15-11 20-7-5-11-12-11-20 0-8 4-15 11-23Z" fill="url(#flame)"/>
+  <path d="M22 18c-4 4-6 9-6 15 0 8 4 15 11 20-6-4-11-10-11-17 0-7 2-13 6-18Z" fill="#ff8f1f" opacity="0.95"/>
+  <path d="M42 18c4 4 6 9 6 15 0 8-4 15-11 20 6-4 11-10 11-17 0-7-2-13-6-18Z" fill="#ff8f1f" opacity="0.95"/>
+  <path d="M18 48c6-2 12-3 14-3s8 1 14 3" fill="none" stroke="#f7c948" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M19 51c6-1 11-2 13-2s7 1 13 2" fill="none" stroke="url(#base)" stroke-width="3" stroke-linecap="round"/>
+  <g fill="#ffde59" stroke="#e38b00" stroke-width="1.2">
+    <circle cx="24" cy="34" r="3.5"/>
+    <circle cx="34" cy="23" r="4.2"/>
+    <circle cx="41" cy="32" r="3.2"/>
+  </g>
+  <path d="M24 34v13M34 23v24M41 32v10" fill="none" stroke="#ffde59" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
