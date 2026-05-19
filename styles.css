@@ -1616,6 +1616,11 @@ textarea:focus {
     flex-shrink: 0;
 }
 
+.contact-icon.whatsapp-icon {
+    background: rgba(37, 211, 102, 0.12);
+    color: #25d366;
+}
+
 .contact-item h4 {
     font-size: 1rem;
     font-weight: 700;
