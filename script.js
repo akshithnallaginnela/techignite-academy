@@ -119,6 +119,34 @@ navLinks.querySelectorAll('a').forEach(link => {
     });
 });
 
+// ========== WHATSAPP FLOAT MESSAGE ROTATION ===========
+const whatsappBubbleText = document.getElementById('whatsappBubbleText');
+
+if (whatsappBubbleText) {
+    const whatsappMessages = [
+        'Chat with us',
+        'Need course guidance?',
+        'Ask about placement support',
+        'Get syllabus and fees details',
+        'Talk to our team now'
+    ];
+    let whatsappMessageIndex = 0;
+
+    const rotateWhatsappMessage = () => {
+        whatsappBubbleText.style.opacity = '0';
+        whatsappBubbleText.style.transform = 'translateY(6px) scale(0.96)';
+
+        window.setTimeout(() => {
+            whatsappMessageIndex = (whatsappMessageIndex + 1) % whatsappMessages.length;
+            whatsappBubbleText.textContent = whatsappMessages[whatsappMessageIndex];
+            whatsappBubbleText.style.opacity = '1';
+            whatsappBubbleText.style.transform = 'translateY(0) scale(1)';
+        }, 220);
+    };
+
+    window.setInterval(rotateWhatsappMessage, 12000);
+}
+
 // ========== SMOOTH SCROLL FOR NAV ==========
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
