@@ -1,0 +1,23 @@
+{
+  "name": "techignite-academy",
+  "version": "1.0.0",
+  "description": "TechIgnite Academy - Ignite Your Tech Career with Expert-Led Training",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshithnallaginnela/techignite-academy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akshithnallaginnela/techignite-academy/issues"
+  },
+  "homepage": "https://github.com/akshithnallaginnela/techignite-academy#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
