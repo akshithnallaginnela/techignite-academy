@@ -1,15 +1,25 @@
 /**
  * Vercel Web Analytics initialization
- * This module loads and configures Vercel Web Analytics using the @vercel/analytics package
+ * This module configures Vercel Web Analytics for the TechIgnite Academy website.
+ * 
+ * The analytics script is automatically loaded from Vercel's CDN when deployed to Vercel.
+ * All page views are tracked automatically without additional configuration.
+ * 
+ * For custom event tracking, use: window.va('event', { name: 'event_name' })
+ * 
+ * Documentation: https://vercel.com/docs/analytics
  */
 
-import { inject } from 'https://esm.sh/@vercel/analytics@2.0.1';
+// Initialize the analytics queue if not already present
+window.va = window.va || function () { 
+  (window.vaq = window.vaq || []).push(arguments); 
+};
 
-// Initialize Vercel Web Analytics
-inject({
-  mode: 'auto', // Automatically detect environment (production/development)
-  debug: false, // Set to true to see debug logs in development
-});
+// Optional: Configure analytics before the main script loads
+// Uncomment and modify as needed:
+// window.va('beforeSend', (event) => {
+//   // Filter or modify events before sending
+//   return event;
+// });
 
-// Analytics is now tracking page views automatically
-console.log('Vercel Web Analytics initialized');
+console.log('Vercel Web Analytics configured and ready');
