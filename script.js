@@ -170,7 +170,7 @@ const coursesData = {
             iconHtml: '<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" style="width:40px;height:40px;">',
             color: '#3b82f6',
             duration: '24 weeks',
-            price: '<del style="opacity:0.6;font-size:0.8em;margin-right:8px;">₹12,000</del>₹8,000',
+            price: '<del style="opacity:0.6;font-size:0.8em;margin-right:8px;">₹15,000</del>₹10,000',
             badge: '🚀 Career Track',
             highlights: [
                 'HTML, CSS, JS, Bootstrap & React hooks',
